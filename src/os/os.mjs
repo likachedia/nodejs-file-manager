@@ -1,7 +1,6 @@
 import { cpus, arch,  homedir, userInfo, EOL} from 'os';
 
 const osInfo = (arg) => {
-    console.log(arg)
     switch (arg) {
         case '--EOL':
             console.log(EOL);
@@ -23,14 +22,9 @@ const osInfo = (arg) => {
             // return arch();
             break;
         default:
-            console.log('defaulte texst');
+            console.error('Invalid argument');
             break;
     }        
 };
 
-// const cpusOfOs = await cpusInfo();
-// const archOfOs =  arch();
-// const homedirOfOs = homedir();
-// const hostnameOfOs = userInfo().username;
-// const eol = `${EOL}`;
 export {osInfo}

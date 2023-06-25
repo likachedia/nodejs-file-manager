@@ -1,21 +1,14 @@
-import { readdir } from 'fs';
+import fs from "node:fs/promises";
 import { resolve, dirname  } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-// const filePath = resolve(dirname(fileURLToPath(import.meta.url)));
-
-const list = async (filePath) => {
-    const fileArry = []
-    readdir(filePath, (err, files) => {
-        if (err)
-          console.log(err);
-        else {
-          console.log("\nCurrent directory filenames:");
-          files.forEach(file => {
-            console.log(file)
-          })
-        }
-      })
+const list = async () => {
+    const files = await fs.readdir(process.cwd());
+    const data = files.map( async (file) => {
+      const stat = await fs.lstat(file);
+      const type = stat.isFile() ? 'file' : stat.isDirectory() ? 'directory' : 'other';
+      return {name: file, type: type};
+    })
+    Promise.all(data).then(data => console.table(data)).catch(err => console.error(err));
 };
 
 export { list } ;

@@ -1,15 +1,34 @@
 import { osInfo } from '../os/os.mjs';
+import { list } from '../files/list.mjs';
+import { resolve, isAbsolute, join } from 'path';
 
-const parseLine = async (args) => {
-    console.log(args, 'from parse 0');
-    const x = typeof args.split(' ')[0] == 'string';
-    const firstArg = args.split(' ')[0].trim();
-    console.log(`firstarg is${firstArg}and`);
-    if(firstArg == 'os') {
-        console.log(args.split('')[0], 'from parse');
-        osInfo(args.split(' ')[1]);
+export function updateCurrentPath(inputPath) {
+  try {
+    if (isAbsolute(inputPath)) {
+      return resolve(inputPath);
     } else {
-        console.log(args.split('')[1], '3');
+      return join(resolve(process.cwd()), inputPath);
+    }
+  } catch(err) {
+    console.log('Invalid argument');
+  }
+
+}
+const parseLine = async (args) => {
+    const command = args.split(' ')[0].trim();
+    const arg = args.split(' ')[1];
+    if(command == 'os') {
+        osInfo(arg);
+    } else if(command == 'cd'){
+        const newDir = updateCurrentPath(arg);
+        try {
+          process.chdir(newDir);
+        } catch(err) {
+          console.log('Invalid argument');
+        }
+        
+    } else if(command == 'ls') {
+        list()
     }
 };
 
