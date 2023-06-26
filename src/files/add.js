@@ -2,10 +2,12 @@ import { open } from 'node:fs/promises';
 import { join } from 'path';
 
 const add = async (args) => {
-    if(args.length > 1) console.error('Invalid argument');   
-    const fileName = args[0];
+    if(args?.length != 1) {
+        console.error('Invalid argument');
+        return;
+    };  
     let filehandle;
-    const path = join(process.cwd(), fileName); // or resovle?
+    const path = join(process.cwd(), fileName);
     try {
         filehandle = await open(path, 'w');
     } catch(err){

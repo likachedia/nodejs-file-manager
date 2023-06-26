@@ -7,7 +7,10 @@ const list = async () => {
       const type = stat.isFile() ? 'file' : stat.isDirectory() ? 'directory' : 'other';
       return {name: file, type: type};
     })
-    Promise.all(data).then(data => console.table(data)).catch(err => console.error(err));
+    Promise.all(data).then(data => {
+      console.table(data);
+      console.log(`You are currently in ${process.cwd()}`);
+    } ).catch(err => console.error('Operation failed'));
 };
 
 export { list } ;
