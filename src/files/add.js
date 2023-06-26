@@ -7,12 +7,13 @@ const add = async (args) => {
         return;
     };  
     let filehandle;
-    const path = join(process.cwd(), fileName);
+    const path = join(process.cwd(), args[0]);
     try {
         filehandle = await open(path, 'w');
     } catch(err){
         console.error('Operation failed');
     }finally {
+
         await filehandle?.close();
     }
 }

@@ -10,7 +10,8 @@ const read = async (args) => {
     try {
         const readableStream = fs.createReadStream(path);
         readableStream.on("data", (chunk) => {
-            console.log(chunk.toString())
+            console.log(chunk.toString());
+            console.log(`You are currently in ${process.cwd()}`);
         });
         readableStream.on('error', (error) => {
             console.error('Operation failed')
