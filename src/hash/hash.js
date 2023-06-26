@@ -4,7 +4,10 @@ import { updateCurrentPath } from '../util/updateCurrentPath.js';
 
 
 const calculateHash = async (args) => {
-    if(args.length > 1) console.error('Invalid argument');   
+    if(args?.length != 1) {
+        console.error('Invalid argument');
+        return;
+    }; 
     const sourceFile = updateCurrentPath(args[0]);
     try {
         const content = await fs.readFile(sourceFile, "utf-8");

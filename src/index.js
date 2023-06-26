@@ -1,5 +1,5 @@
-import { parseUsername } from './cliArgs/parseArgs.mjs';
-import { parseLine } from './util/parse.mjs';
+import { parseUsername } from './cliArgs/parseArgs.js';
+import { parseLine } from './util/parse.js';
 import { createInterface } from 'readline';
 import { exit } from 'process';
 import { homedir } from 'os';

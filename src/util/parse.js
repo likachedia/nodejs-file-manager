@@ -1,9 +1,9 @@
-import { osInfo } from '../os/os.mjs';
-import { list } from '../files/list.mjs';
+import { osInfo } from '../os/os.js';
+import { list } from '../files/list.js';
 import { add } from '../files/add.js';
 import { remove } from '../files/rm.js';
 import { read } from '../files/cat.js';
-import { commands } from '../comands/comands.mjs';
+import { commands } from '../comands/comands.js';
 import { cd } from '../navigation/cd.js';
 import { up } from '../navigation/up.js';
 import compress from '../zip/compress.js';
