@@ -1,6 +1,9 @@
 import { osInfo } from '../os/os.mjs';
 import { list } from '../files/list.mjs';
 import { resolve, isAbsolute, join } from 'path';
+import { add } from '../files/add.js';
+import { remove } from '../files/rm.js';
+import { read } from '../files/cat.js';
 
 export function updateCurrentPath(inputPath) {
   try {
@@ -29,6 +32,14 @@ const parseLine = async (args) => {
         
     } else if(command == 'ls') {
         list()
+    } else if(command == 'add') {
+        add(arg)
+    } else if(command == 'rm') {
+      const path = updateCurrentPath(arg);
+      remove(path)
+    } else if(command == 'cat') {
+      const path = updateCurrentPath(arg);
+      read(path)
     }
 };
 
