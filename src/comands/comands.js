@@ -11,4 +11,5 @@ export const commands = {
     compress: 'compress',
     rn: 'rn',
     up: 'up',
+    cp: 'cp',
 }

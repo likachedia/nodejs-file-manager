@@ -10,6 +10,7 @@ import compress from '../zip/compress.js';
 import decompress from '../zip/decompress.js';
 import calculateHash from '../hash/hash.js';
 import rename from '../files/rn.js';
+import { cp } from '../files/cp.js';
 
 const parseLine = async (args) => {
     const [command, ...arg] = args.includes('\'') ? args.split('\'').filter(entry => entry.trim() != '') : args.split(' ');
@@ -46,7 +47,10 @@ const parseLine = async (args) => {
           break;
       case commands.up:
             up();
-            break;   
+            break;
+      case commands.cp:
+        cp(arg);
+        break;         
       default: 
         console.log('Invalid argument');
         break;             
