@@ -5,26 +5,14 @@ import { remove } from '../files/rm.js';
 import { read } from '../files/cat.js';
 import { commands } from '../comands/comands.mjs';
 import { cd } from '../navigation/cd.js';
-import { updateCurrentPath } from './updateCurrentPath.js'
+import { up } from '../navigation/up.js';
 import compress from '../zip/compress.js';
 import decompress from '../zip/decompress.js';
 import calculateHash from '../hash/hash.js';
 import rename from '../files/rn.js';
-// const parsArgs = async (arg) => {
-//   let sourcePath;
-//   let destinationPath;
-//   if(arg.length == 1) {
-//     sourcePath = arg[0];
-//   } else {
-//     sourcePath = arg[0];
-//     destinationPath = arg[1];
-//   }
-// }
 
 const parseLine = async (args) => {
-    // const [command, ...arg] = args.split(' ');
     const [command, ...arg] = args.includes('\'') ? args.split('\'').filter(entry => entry.trim() != '') : args.split(' ');
-    console.log(command, arg);
     switch(command.trim()) {
       case commands.os:
         osInfo(arg);
@@ -53,9 +41,12 @@ const parseLine = async (args) => {
       case commands.hash:
         calculateHash(arg);
         break;
-        case commands.rn:
+      case commands.rn:
           rename(arg);
-          break;  
+          break;
+      case commands.up:
+            up();
+            break;   
       default: 
         console.log('Invalid argument');
         break;             

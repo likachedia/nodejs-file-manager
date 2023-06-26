@@ -10,4 +10,5 @@ export const commands = {
     decompress: 'decompress',
     compress: 'compress',
     rn: 'rn',
+    up: 'up',
 }

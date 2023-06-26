@@ -1,4 +1,5 @@
-import { cpus, arch,  homedir, userInfo, EOL} from 'os';
+import { arch,  homedir, userInfo, EOL} from 'os';
+import { cpusInfo } from './cpus.js';
 
 const osInfo = (args) => {
     if(args.length > 1) console.error('Invalid argument'); 
@@ -7,20 +8,16 @@ const osInfo = (args) => {
             console.log(JSON.stringify(EOL));
             break;
         case '--cpus':
-            console.table(cpus())
-            // return cpus();
+            console.table(cpusInfo());
             break;
         case '--homedir':
             console.log(homedir());
-            // return homedir();
             break;
         case '--username':
             console.log(userInfo().username);
-            // return userInfo().username;
             break;
         case '--architecture':
             console.log(arch());
-            // return arch();
             break;
         default:
             console.error('Invalid argument');

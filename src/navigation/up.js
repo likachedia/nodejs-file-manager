@@ -1,8 +1,8 @@
 import { updateCurrentPath } from '../util/updateCurrentPath.js';
+import { resolve } from 'path';
 
-const cd = async (args) => {
-    if(args.length > 1) console.error('Invalid argument');
-    const path = updateCurrentPath(args[0]);
+const up = async () => {
+    const path = resolve(process.cwd(), '../')
     try {
         process.chdir(path);
       } catch(err) {
@@ -10,4 +10,4 @@ const cd = async (args) => {
     }
 }
 
-export { cd }
+export { up }
