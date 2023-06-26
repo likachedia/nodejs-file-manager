@@ -1,9 +1,10 @@
 import { cpus, arch,  homedir, userInfo, EOL} from 'os';
 
-const osInfo = (arg) => {
-    switch (arg) {
+const osInfo = (args) => {
+    if(args.length > 1) console.error('Invalid argument'); 
+    switch (args[0]) {
         case '--EOL':
-            console.log(EOL);
+            console.log(JSON.stringify(EOL));
             break;
         case '--cpus':
             console.table(cpus())

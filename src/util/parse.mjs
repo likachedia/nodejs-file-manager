@@ -1,46 +1,66 @@
 import { osInfo } from '../os/os.mjs';
 import { list } from '../files/list.mjs';
-import { resolve, isAbsolute, join } from 'path';
 import { add } from '../files/add.js';
 import { remove } from '../files/rm.js';
 import { read } from '../files/cat.js';
+import { commands } from '../comands/comands.mjs';
+import { cd } from '../navigation/cd.js';
+import { updateCurrentPath } from './updateCurrentPath.js'
+import compress from '../zip/compress.js';
+import decompress from '../zip/decompress.js';
+import calculateHash from '../hash/hash.js';
+import rename from '../files/rn.js';
+// const parsArgs = async (arg) => {
+//   let sourcePath;
+//   let destinationPath;
+//   if(arg.length == 1) {
+//     sourcePath = arg[0];
+//   } else {
+//     sourcePath = arg[0];
+//     destinationPath = arg[1];
+//   }
+// }
 
-export function updateCurrentPath(inputPath) {
-  try {
-    if (isAbsolute(inputPath)) {
-      return resolve(inputPath);
-    } else {
-      return join(resolve(process.cwd()), inputPath);
-    }
-  } catch(err) {
-    console.log('Invalid argument');
-  }
-
-}
 const parseLine = async (args) => {
-    const command = args.split(' ')[0].trim();
-    const arg = args.split(' ')[1];
-    if(command == 'os') {
+    // const [command, ...arg] = args.split(' ');
+    const [command, ...arg] = args.includes('\'') ? args.split('\'').filter(entry => entry.trim() != '') : args.split(' ');
+    console.log(command, arg);
+    switch(command.trim()) {
+      case commands.os:
         osInfo(arg);
-    } else if(command == 'cd'){
-        const newDir = updateCurrentPath(arg);
-        try {
-          process.chdir(newDir);
-        } catch(err) {
-          console.log('Invalid argument');
-        }
-        
-    } else if(command == 'ls') {
-        list()
-    } else if(command == 'add') {
-        add(arg)
-    } else if(command == 'rm') {
-      const path = updateCurrentPath(arg);
-      remove(path)
-    } else if(command == 'cat') {
-      const path = updateCurrentPath(arg);
-      read(path)
+        break;
+      case commands.add:
+        add(arg);
+        break;
+      case commands.ls:
+        list();
+        break;
+      case commands.cd:
+        cd(arg);
+        break;
+      case commands.rm:
+        remove(arg)
+        break;     
+      case commands.cat:
+        read(arg);
+        break;
+      case commands.compress:
+        compress(arg);
+        break;
+      case commands.decompress:
+        decompress(arg);
+          break;
+      case commands.hash:
+        calculateHash(arg);
+        break;
+        case commands.rn:
+          rename(arg);
+          break;  
+      default: 
+        console.log('Invalid argument');
+        break;             
     }
+  console.log(`You are currently in ${process.cwd()}`);
 };
 
 export { parseLine }

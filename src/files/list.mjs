@@ -1,5 +1,4 @@
 import fs from "node:fs/promises";
-import { resolve, dirname  } from 'node:path';
 
 const list = async () => {
     const files = await fs.readdir(process.cwd());

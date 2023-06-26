@@ -3,11 +3,6 @@ const parseUsername = () => {
     .map(arg => arg.split('=')[1]);
 };
 
-const parseArgs = (cliArg) => {
-    
-}
-
 export {
-    parseUsername,
-    parseArgs,
+    parseUsername
 }
