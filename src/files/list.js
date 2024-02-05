@@ -1,15 +1,5 @@
 import fs from "node:fs/promises";
 
-function compareByType( a, b ) {
-  if ( a.type < b.type && a.name < b.name){
-    return -1;
-  }
-  if ( a.type > b.type && a.name > b.name){
-    return 1;
-  }
-  return 0;
-}
-
 function compare( a, b ) {
   if ( a.name < b.name ){
     return -1;
