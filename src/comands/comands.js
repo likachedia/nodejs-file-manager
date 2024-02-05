@@ -12,4 +12,5 @@ export const commands = {
     rn: 'rn',
     up: 'up',
     cp: 'cp',
+    mv: 'mv',
 }

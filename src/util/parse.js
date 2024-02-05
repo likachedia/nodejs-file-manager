@@ -3,6 +3,7 @@ import { list } from '../files/list.js';
 import { add } from '../files/add.js';
 import { remove } from '../files/rm.js';
 import { read } from '../files/cat.js';
+import { mv } from '../files/mv.js';
 import { commands } from '../comands/comands.js';
 import { cd } from '../navigation/cd.js';
 import { up } from '../navigation/up.js';
@@ -50,7 +51,10 @@ const parseLine = async (args) => {
             break;
       case commands.cp:
         cp(arg);
-        break;         
+        break;
+      case commands.mv:
+        mv(arg);
+        break;        
       default: 
         console.log('Invalid argument');
         break;             

@@ -1,9 +1,9 @@
-import fs from "node:fs";
-import { updateCurrentPath } from '../util/updateCurrentPath.js';
+import fs from "fs";
 import { resolve, parse } from "node:path";
 import { pipeline } from "node:stream";
+import { updateCurrentPath } from '../util/updateCurrentPath.js';
 
-const cp = async (args) => {
+const mv = async (args) => {
     if(args?.length != 2) {
         console.error('Invalid argument');
         return;
@@ -15,7 +15,9 @@ const cp = async (args) => {
         const path2 = resolve(args[1], base);
         const readableStream = fs.createReadStream(path);
         const writableStream = fs.createWriteStream(path2);
-        pipeline(readableStream, writableStream);
+        pipeline(readableStream, writableStream, () => {
+            fs.unlink(path, () => {console.log(path)});
+        });
         console.log(`You are currently in ${process.cwd()}`);
     } catch (error) {
         console.error('Operation failed')
@@ -23,4 +25,4 @@ const cp = async (args) => {
 
 };
 
-export { cp }
+export { mv };

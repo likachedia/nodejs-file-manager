@@ -8,7 +8,7 @@ process.chdir(homedir());
 
 const username = parseUsername()[0] ?? 'Anonymous';
 const welcomeText = `Welcome to the File Manager, ${username}!`;
-const goodbayText = `Thank you for using File Manager, ${username}, goodbye!`;
+const goodbyeText = `Thank you for using File Manager, ${username}, goodbye!`;
 console.log(welcomeText);
 console.log(`You are currently in ${process.cwd()}`);
 const rl = createInterface({
@@ -27,6 +27,6 @@ rl.on('line', async (line) => {
             break;
     }
 }).on('close', () => {
-    console.log(goodbayText);
+    console.log(goodbyeText);
     process.nextTick(() => exit())
 });
